@@ -1,0 +1,14 @@
+/* src/App.css */
+.App {
+  text-align: center;
+  background-color: #1A1A1A; /* Fundo principal */
+  color: white;
+  min-height: 100vh; /* Ocupa a altura mínima da tela */
+}
+
+.main-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 70px; /* Para acomodar o header fixo */
+}

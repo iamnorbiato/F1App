@@ -1,0 +1,56 @@
+# appserver-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: f1app-appserver-deployment
+  namespace: default
+  labels:
+    app: f1app
+    tier: appserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: f1app
+      tier: appserver
+  template:
+    metadata:
+      labels:
+        app: f1app
+        tier: appserver
+    spec:
+      containers:
+      - name: appserver
+        image: f1app-appserver:latest # Sua imagem Docker que acabamos de construir
+        imagePullPolicy: Never # Importante para ambiente de desenvolvimento local!
+                               # Diz ao Kubernetes para não tentar puxar a imagem de um registro remoto,
+                               # mas usar a imagem que já está no Docker Desktop.
+        ports:
+        - containerPort: 8000 # A porta que o Django expõe
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_PORT
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_USER
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: f1app-config
+              key: DATABASE_NAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: f1app-db-secret
+              key: db_password
+        # Em um ambiente real, você também teria variáveis para DEBUG, ALLOWED_HOSTS, etc.

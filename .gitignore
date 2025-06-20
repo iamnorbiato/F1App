@@ -1,0 +1,42 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.sqlite3
+.git/
+.vscode/
+venv_django/
+.Python/
+.env
+node_modules/ 
+
+# Django
+db.sqlite3
+/media
+/static
+
+# Node / React
+node_modules/
+build/ # Pasta de build do React (se você fizer o build para prod)
+dist/
+.next/
+.parcel-cache/
+yarn-error.log
+
+# Docker / Kubernetes
+.dockerignore
+*.pem # Chaves de segurança
+*.log
+!_manifests/base/kustomization.yaml # Garante que o kustomization.yaml da base seja incluído
+!_manifests/overlays/ # Garante que as pastas de overlays sejam incluídas
+# Exceções para permitir os kustomization.yaml dentro dos overlays
+_manifests/overlays/**/kustomization.yaml
+
+# IDEs
+.vscode/ # Ajuste se você usa .vscode para configurações de projeto compartilhadas
+.idea/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db

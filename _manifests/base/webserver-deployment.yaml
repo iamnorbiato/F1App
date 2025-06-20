@@ -1,0 +1,31 @@
+# webserver-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: f1app-webserver-deployment
+  namespace: default # Kustomize vai sobrescrever para f1app
+  labels:
+    app: f1app
+    tier: webserver
+spec:
+  replicas: 1 # Uma réplica para desenvolvimento
+  selector:
+    matchLabels:
+      app: f1app
+      tier: webserver
+  template:
+    metadata:
+      labels:
+        app: f1app
+        tier: webserver
+    spec:
+      containers:
+      - name: webserver
+        image: f1app-webserver:latest # Sua imagem Docker que acabamos de construir
+        imagePullPolicy: Never # Importante para ambiente de desenvolvimento local!
+                               # Usará a imagem do Docker Desktop.
+        ports:
+        - containerPort: 80 # A porta que o Nginx está expondo internamente no contêiner
+        # Não é necessário volume mount para o código React aqui,
+        # pois o npm start está no host e o Nginx está proxyando para ele.
+        # O nginx.conf já está na imagem.

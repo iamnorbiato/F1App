@@ -1,0 +1,22 @@
+/* src/components/DashboardWidget.css */
+.dashboard-widget {
+  background-color: #2C2C2C;
+  border: 1px solid #444444;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #FFFFFF;
+}
+
+.widget-title {
+  font-size: 1.4em;
+  color: #E10600; /* Cor de destaque F1 */
+  margin-bottom: 15px;
+  border-bottom: 1px solid #444444;
+  padding-bottom: 10px;
+}
+
+.widget-content {
+  /* Estilos para o conteúdo interno do widget */
+}
