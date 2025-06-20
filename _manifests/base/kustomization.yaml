@@ -4,6 +4,7 @@ kind: Kustomization
 
 # Recursos base
 resources:
+  - namespace.yaml
   - appserver-deployment.yaml
   - appserver-service.yaml
   - db-secret.yaml
