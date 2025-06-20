@@ -8,12 +8,12 @@ const Sidebar = () => {
       <nav>
         <ul>
           {/* Para a página inicial, use "/" */}
-          <li><Link to="/">Início / Dados ao Vivo</Link></li>
-          <li><Link to="/latest-results">Últimos Resultados</Link></li>
-          <li><Link to="/championship-standings">Classificação Campeonato</Link></li>
-          <li><Link to="/driver-profiles">Perfis de Pilotos</Link></li>
-          <li><Link to="/team-profiles">Perfis de Equipes</Link></li>
-          <li><Link to="/track-guide">Guia de Autódromos</Link></li>
+          <li><Link to="/">Início</Link></li>
+          <li><Link to="/latest-results">Resultados</Link></li>
+          <li><Link to="/championship-standings">Classificação</Link></li>
+          <li><Link to="/driver-profiles">Pilotos</Link></li>
+          <li><Link to="/team-profiles">Equipes</Link></li>
+          <li><Link to="/track-guide">Autódromos</Link></li>
           {/* ESTA É A LINHA CRÍTICA PARA O GRÁFICO ANIMADO */}
           <li><Link to="/historical-stats">Estatísticas Históricas</Link></li>
         </ul>
