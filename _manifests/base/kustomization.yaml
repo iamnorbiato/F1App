@@ -10,6 +10,7 @@ resources:
   - db-secret.yaml
   - webserver-deployment.yaml
   - webserver-service.yaml
+  - f1app-data-import-cronjob.yaml
 
 # Geração do ConfigMap base (que será patchado nos overlays)
 configMapGenerator:

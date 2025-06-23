@@ -1,0 +1,47 @@
+# _manifests/base/f1app-data-import-cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: f1app-data-import-job
+  namespace: f1app # Deve ser o mesmo namespace do seu Deployment
+spec:
+  schedule: "0 12 * * *" # Executa às 12:00 (meio-dia) todos os dias
+  jobTemplate:
+    spec:
+      # backoffLimit: 3 # Opcional: número de retries para o Job se ele falhar
+      template:
+        spec:
+          containers:
+          - name: data-importer
+            image: f1app-appserver:latest # Usa a imagem do seu AppServer
+            imagePullPolicy: IfNotPresent # Padrão: puxa se não presente (para dev e prod)
+            command: ["/app/scripts/run_data_imports.sh"] # Executa o seu script
+            env:
+            # Variáveis de ambiente para conexão com o banco de dados
+            # As mesmas que o seu AppServer usa
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: f1app-config # Nome do ConfigMap gerado pelo Kustomize
+                  key: DATABASE_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: f1app-config
+                  key: DATABASE_PORT
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: f1app-config
+                  key: DATABASE_USER
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: f1app-config
+                  key: DATABASE_NAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: f1app-db-secret # Nome do Secret
+                  key: db_password
+          restartPolicy: OnFailure # Se o container falhar, tenta reiniciar (o script já tem retry interno)
